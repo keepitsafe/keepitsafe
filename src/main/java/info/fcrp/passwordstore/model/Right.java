@@ -1,5 +1,6 @@
 package info.fcrp.passwordstore.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -12,10 +13,10 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class Right extends ModelObject {
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
 	private User user;
 
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
 	private PasswordStore passwordStore;
 
 	public Right() {

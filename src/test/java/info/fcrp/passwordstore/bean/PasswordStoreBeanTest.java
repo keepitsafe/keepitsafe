@@ -30,11 +30,11 @@ public class PasswordStoreBeanTest {
 		PasswordStore computers = psBean.create("computers");
 		PasswordStore servers = psBean.create("servers");
 
-		uBean.addRight(ana, computers, null);
-		uBean.addRight(bob, computers, null);
-		uBean.addRight(charlie, computers, null);
+		uBean.addRight(ana, computers);
+		uBean.addRight(bob, computers);
+		uBean.addRight(charlie, computers);
 
-		uBean.addRight(ana, servers, null);
+		uBean.addRight(ana, servers);
 
 		assertEquals(2, ana.getRights().size());
 		assertEquals(1, bob.getRights().size());

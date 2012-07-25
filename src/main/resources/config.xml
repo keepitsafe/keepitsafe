@@ -8,7 +8,7 @@
 
 	<context:annotation-config />
 
-	<bean class="info.swegroup.passwordstore.ApplicationConfig" />
+	<bean class="info.fcrp.passwordstore.ApplicationConfig" />
 
 
 	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -31,31 +31,31 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>info.swegroup.passwordstore.model.ModelObject</value>
-				<value>info.swegroup.passwordstore.model.Password</value>
-				<value>info.swegroup.passwordstore.model.PasswordStore</value>
-				<value>info.swegroup.passwordstore.model.Right</value>
-				<value>info.swegroup.passwordstore.model.User</value>
+				<value>info.fcrp.passwordstore.model.ModelObject</value>
+				<value>info.fcrp.passwordstore.model.Password</value>
+				<value>info.fcrp.passwordstore.model.PasswordStore</value>
+				<value>info.fcrp.passwordstore.model.Right</value>
+				<value>info.fcrp.passwordstore.model.User</value>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="passwordStoreDAO" class="info.swegroup.passwordstore.dao.PasswordStoreDAOImpl">
+	<bean id="passwordStoreDAO" class="info.fcrp.passwordstore.dao.PasswordStoreDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="rightDAO" class="info.swegroup.passwordstore.dao.RightDAOImpl">
+	<bean id="rightDAO" class="info.fcrp.passwordstore.dao.RightDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="userDAO" class="info.swegroup.passwordstore.dao.UserDAOImpl">
+	<bean id="userDAO" class="info.fcrp.passwordstore.dao.UserDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="passwordStoreBean" class="info.swegroup.passwordstore.bean.PasswordStoreBeanImpl">
+	<bean id="passwordStoreBean" class="info.fcrp.passwordstore.bean.PasswordStoreBeanImpl">
 	</bean>
 	
-	<bean id="cryptBean" class="info.swegroup.passwordstore.bean.CryptBeanImpl">
+	<bean id="cryptBean" class="info.fcrp.passwordstore.bean.CryptBeanImpl">
 	</bean>
 
 </beans>

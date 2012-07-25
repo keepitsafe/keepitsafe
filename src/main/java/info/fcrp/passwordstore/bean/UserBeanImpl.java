@@ -44,55 +44,13 @@ public class UserBeanImpl implements UserBean {
 		return usr;
 	}
 
-	public void addRight(User usr, PasswordStore ps, String key) {
+	public void addRight(User usr, PasswordStore ps) {
 		Right right = rightDAO.findByUserAndPStore(usr, ps);
 		if (right == null) {
 			right = new Right(usr, ps);
 		}
-
-		try {
-			//
-			// KeyPairGenerator kpg = null;
-			// kpg = KeyPairGenerator.getInstance("RSA", "BC");
-			// kpg.initialize(1024, new SecureRandom());
-			// KeyPair kp = kpg.generateKeyPair();
-			// PrivateKey priKey = kp.getPrivate();
-			// PublicKey pubKey = kp.getPublic();
-
-//			byte[] usrKey = Base64.decodeBase64(usr.getPublicKey());
-			byte[] usrKey = null;
-			byte[] k = Base64.decodeBase64(key);
-
-			KeyFactory keyFactory = KeyFactory.getInstance("RSA/ECB/PKCS1Padding");
-			X509EncodedKeySpec keySpec = new X509EncodedKeySpec(usrKey);
-			PublicKey pubKey = keyFactory.generatePublic(keySpec);
-
-			Cipher c = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-			c.init(Cipher.ENCRYPT_MODE, pubKey);
-			c.update(k);
-			byte[] kC = c.doFinal();
-
-//			right.setPasswordStoreKey(Base64.encodeBase64String(kC));
-
-		} catch (InvalidKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			e.printStackTrace();
-		} catch (IllegalBlockSizeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (BadPaddingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		usr.getRights().add(right);
+		ps.getRights().add(right);
 		rightDAO.save(right);
 	}
 }

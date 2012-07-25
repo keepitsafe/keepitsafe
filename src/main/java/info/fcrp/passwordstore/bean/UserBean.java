@@ -19,5 +19,10 @@ public interface UserBean {
 	 */
 	User get(String string);
 
-	void addRight(User usr, PasswordStore ps, String key);
+	/**
+	 * Allow an user to access a password store
+	 * @param usr the user
+	 * @param ps the password store
+	 */
+	void addRight(User usr, PasswordStore ps);
 }
