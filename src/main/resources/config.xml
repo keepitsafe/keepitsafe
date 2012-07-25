@@ -54,5 +54,8 @@
 
 	<bean id="passwordStoreBean" class="info.swegroup.passwordstore.bean.PasswordStoreBeanImpl">
 	</bean>
+	
+	<bean id="cryptBean" class="info.swegroup.passwordstore.bean.CryptBeanImpl">
+	</bean>
 
 </beans>
