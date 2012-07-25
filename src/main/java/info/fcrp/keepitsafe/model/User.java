@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import org.hibernate.Hibernate;
+
 /**
  * The user that has access to a password
  * 
@@ -59,6 +61,11 @@ public class User extends ModelObject {
 	 */
 	public void setLogin(String login) {
 		this.login = login;
+	}
+	
+	@Override
+	public String toString() {
+		return "["+getId() + "][" + login + "][" + rights +"]" ;
 	}
 
 }

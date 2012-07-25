@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
  * 
  */
 @Entity
-public class Password extends ModelObject {
+public class Secret extends ModelObject {
 	@Column
 	private String name;
 
@@ -19,10 +19,10 @@ public class Password extends ModelObject {
 	private String user;
 
 	@Column
-	private String value;
+	private String password;
 
 	@ManyToOne
-	private Keep passwordStore;
+	private Keep keep;
 
 	/**
 	 * @return the name
@@ -55,33 +55,37 @@ public class Password extends ModelObject {
 	}
 
 	/**
-	 * @return the passwordStore
-	 */
-	public Keep getPasswordStore() {
-		return passwordStore;
-	}
-
-	/**
-	 * @param passwordStore
-	 *            the passwordStore to set
-	 */
-	public void setPasswordStore(Keep passwordStore) {
-		this.passwordStore = passwordStore;
-	}
-
-	/**
 	 * @return the value
 	 */
-	public String getValue() {
-		return value;
+
+	/**
+	 * @return the keep
+	 */
+	public Keep getKeep() {
+		return keep;
 	}
 
 	/**
-	 * @param value
-	 *            the value to set
+	 * @param keep
+	 *            the keep to set
 	 */
-	public void setValue(String value) {
-		this.value = value;
+	public void setKeep(Keep keep) {
+		this.keep = keep;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

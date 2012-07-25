@@ -10,7 +10,6 @@
 
 	<bean class="info.fcrp.keepitsafe.ApplicationConfig" />
 
-
 	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
@@ -32,12 +31,17 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>info.fcrp.keepitsafe.model.ModelObject</value>
-				<value>info.fcrp.keepitsafe.model.Password</value>
+				<value>info.fcrp.keepitsafe.model.Secret</value>
 				<value>info.fcrp.keepitsafe.model.Keep</value>
 				<value>info.fcrp.keepitsafe.model.Right</value>
 				<value>info.fcrp.keepitsafe.model.User</value>
 			</list>
 		</property>
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
 	<bean id="keepDAO" class="info.fcrp.keepitsafe.dao.KeepDAOImpl">
@@ -54,7 +58,7 @@
 
 	<bean id="keepBean" class="info.fcrp.keepitsafe.bean.KeepBeanImpl">
 	</bean>
-	
+
 	<bean id="cryptBean" class="info.fcrp.keepitsafe.bean.CryptBeanImpl">
 	</bean>
 

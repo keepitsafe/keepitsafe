@@ -1,8 +1,6 @@
 package info.fcrp.keepitsafe.bean;
 
 import static org.junit.Assert.assertEquals;
-import info.fcrp.keepitsafe.bean.KeepBean;
-import info.fcrp.keepitsafe.bean.UserBean;
 import info.fcrp.keepitsafe.model.Keep;
 import info.fcrp.keepitsafe.model.User;
 
@@ -12,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/config.xml" })

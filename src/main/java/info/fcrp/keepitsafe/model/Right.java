@@ -17,16 +17,16 @@ public class Right extends ModelObject {
 	private User user;
 
 	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH})
-	private Keep passwordStore;
+	private Keep keep;
 
 	public Right() {
 		super();
 	}
 
-	public Right(User usr, Keep ps) {
+	public Right(User usr, Keep kp) {
 		this();
 		this.user = usr;
-		this.passwordStore = ps;
+		this.keep = kp;
 	}
 
 	/**
@@ -45,18 +45,18 @@ public class Right extends ModelObject {
 	}
 
 	/**
-	 * @return the passwordStore
+	 * @return the keep
 	 */
-	public Keep getPasswordStore() {
-		return passwordStore;
+	public Keep getKeep() {
+		return keep;
 	}
 
 	/**
-	 * @param passwordStore
-	 *            the passwordStore to set
+	 * @param keep the keep to set
 	 */
-	public void setPasswordStore(Keep passwordStore) {
-		this.passwordStore = passwordStore;
+	public void setKeep(Keep keep) {
+		this.keep = keep;
 	}
 
+	
 }

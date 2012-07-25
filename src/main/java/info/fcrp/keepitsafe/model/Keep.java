@@ -17,21 +17,21 @@ public class Keep extends ModelObject {
 	@Column
 	private String name;
 
-	@OneToMany(mappedBy = "passwordStore")
+	@OneToMany(mappedBy = "keep")
 	private List<Right> rights;
 
-	@OneToMany(mappedBy = "passwordStore")
-	private List<Password> passwords;
-	
+	@OneToMany(mappedBy = "keep")
+	private List<Secret> secrets;
+
 	public Keep() {
 		super();
 	}
-	
+
 	public Keep(String name) {
 		this();
 		this.name = name;
 	}
-	
+
 	/**
 	 * @return the name
 	 */
@@ -40,7 +40,8 @@ public class Keep extends ModelObject {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -54,25 +55,26 @@ public class Keep extends ModelObject {
 	}
 
 	/**
-	 * @param rights the rights to set
+	 * @param rights
+	 *            the rights to set
 	 */
 	public void setRights(List<Right> rights) {
 		this.rights = rights;
 	}
 
 	/**
-	 * @return the passwords
+	 * @return the secrets
 	 */
-	public List<Password> getPasswords() {
-		return passwords;
+	public List<Secret> getSecrets() {
+		return secrets;
 	}
 
 	/**
-	 * @param passwords the passwords to set
+	 * @param secrets
+	 *            the secrets to set
 	 */
-	public void setPasswords(List<Password> passwords) {
-		this.passwords = passwords;
+	public void setSecrets(List<Secret> secrets) {
+		this.secrets = secrets;
 	}
 
-	
 }
