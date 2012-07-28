@@ -9,8 +9,10 @@ public interface GenericDAO<OBJ extends ModelObject> {
 	void save(OBJ object);
 
 	void delete(OBJ object);
+	
+	void update(OBJ object);
 
-	OBJ find(int id);
+	OBJ find(long id);
 
 	List<OBJ> findAll();
 }

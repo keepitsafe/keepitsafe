@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import org.springframework.stereotype.Service;
+
 /**
  * A set of passwords
  * 

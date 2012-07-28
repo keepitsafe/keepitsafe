@@ -24,12 +24,16 @@ public abstract class GenericDAOImpl<OBJ extends ModelObject> extends
 		getHibernateTemplate().save(object);
 	}
 
+	public void update(OBJ object) {
+		getHibernateTemplate().update(object);
+	}
+
 	public void delete(OBJ object) {
 		getHibernateTemplate().delete(object);
 	}
 
 	@SuppressWarnings("unchecked")
-	public OBJ find(int id) {
+	public OBJ find(long id) {
 		return (OBJ) getHibernateTemplate().get(persistentClass, id);
 	}
 
