@@ -61,8 +61,8 @@
 	<bean id="secretDAO" class="info.fcrp.keepitsafe.dao.SecretDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
-	
+
+
 	<bean id="keepBean" class="info.fcrp.keepitsafe.bean.KeepBeanImpl">
 	</bean>
 
@@ -72,13 +72,17 @@
 	<bean id="keepService" class="info.fcrp.keepitsafe.service.KeepService">
 	</bean>
 
+	<bean id="secretService" class="info.fcrp.keepitsafe.service.SecretService">
+	</bean>
+
 	<mvc:interceptors>
-    	<bean class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
-        	<property name="sessionFactory">
-            	<ref local="sessionFactory" />
-        	</property>
-        	<property name="flushModeName" value="FLUSH_AUTO"/>
-    	</bean>
+		<bean
+			class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
+			<property name="sessionFactory">
+				<ref local="sessionFactory" />
+			</property>
+			<property name="flushModeName" value="FLUSH_AUTO" />
+		</bean>
 	</mvc:interceptors>
 
 

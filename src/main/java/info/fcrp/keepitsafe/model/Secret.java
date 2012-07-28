@@ -2,7 +2,13 @@ package info.fcrp.keepitsafe.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
  * A password. Nothing else ;)
@@ -11,6 +17,10 @@ import javax.persistence.ManyToOne;
  * 
  */
 @Entity
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+@NamedQueries({
+		@NamedQuery(name="secret.find.keepId", query="select sc from Secret sc where sc.keep.id = :keepId")
+})
 public class Secret extends ModelObject {
 	@Column
 	private String name;
@@ -21,7 +31,8 @@ public class Secret extends ModelObject {
 	@Column
 	private String password;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JsonBackReference
 	private Keep keep;
 
 	/**

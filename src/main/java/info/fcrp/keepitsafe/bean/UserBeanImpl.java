@@ -50,7 +50,7 @@ public class UserBeanImpl implements UserBean {
 			right = new Right(usr, ps);
 		}
 		usr.getRights().add(right);
-		ps.getRights().add(right);
+		//ps.getRights().add(right);
 		rightDAO.save(right);
 	}
 }
