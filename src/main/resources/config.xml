@@ -58,6 +58,11 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<bean id="secretDAO" class="info.fcrp.keepitsafe.dao.SecretDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	
 	<bean id="keepBean" class="info.fcrp.keepitsafe.bean.KeepBeanImpl">
 	</bean>
 
