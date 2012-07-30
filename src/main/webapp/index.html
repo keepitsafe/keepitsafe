@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>KeepIt Safe</title>
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+
+<script src="jquery/jquery-1.7.2.min.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<script src="js/main.js"></script>
+<script src="jquery/json/jquery.json-2.3.min.js"></script>
+<script src="js/zeroclipboard/ZeroClipboard.js"></script>
+</head>
+<body>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">KeepIt Safe</a>
+				<ul class="nav">
+					<li class="active"><a href="#">My Keeps</a></li>
+					<li><a href="#">New Keep</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" id="container">
+		<div class="row">
+			<div class="span6" id="keep-container-1"></div>
+			<div class="span6" id="keep-container-2"></div>
+		</div>
+		<div class="row">
+			<div class="span12">http://www.fcrp.info/keepitsafe</div>
+		</div>
+	</div>
+
+
+	<!-- 
+	 <h2>Security Keep</h2>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Secret</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="#">Syslog Pass</a></td>
+							<td>The syslog password</td>
+						</tr>
+						<tr>
+							<td>AD</td>
+							<td>The Active Directory sync password</td>
+						</tr>
+					</tbody>
+				</table>
+				<a data-toggle="modal" class="btn btn-primary" href="#new-secret">New
+					Modal</a>
+				<hr>
+	
+	 -->
+
+	<div class="modal hide" id="secret-dialog">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Secret Dialog</h3>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="secret-name">Secret</label>
+					<div class="controls">
+						<input type="hidden" id="secret-id">
+						<input type="text" id="secret-name">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="secret-description">Description</label>
+					<div class="controls">
+						<textarea id="secret-description"></textarea>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="secret-login">Login</label>
+					<div class="controls">
+						<input type="text" id="secret-login">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="secret-password">Password</label>
+					<div class="controls">
+						<input type="password" id="secret-password"> <input
+							type="text" id="secret-password-tx" class="hide"> <a
+							href="#" class="btn" id="show-password">Show Password</a>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#"
+				class="btn btn-primary">Copy Login</a><a href="#"
+				class="btn btn-primary">Copy Password</a><a href="#"
+				class="btn btn-success" id="btn-save-secret">Save changes</a><a href="#"
+				class="btn btn-danger">Delete</a>
+		</div>
+	</div>
+
+</body>
+</html>

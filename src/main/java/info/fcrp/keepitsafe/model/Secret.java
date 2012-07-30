@@ -26,8 +26,11 @@ public class Secret extends ModelObject {
 	private String name;
 
 	@Column
-	private String user;
+	private String description;
 
+	@Column
+	private String login;
+	
 	@Column
 	private String password;
 
@@ -50,20 +53,7 @@ public class Secret extends ModelObject {
 		this.name = name;
 	}
 
-	/**
-	 * @return the user
-	 */
-	public String getUser() {
-		return user;
-	}
 
-	/**
-	 * @param user
-	 *            the user to set
-	 */
-	public void setUser(String user) {
-		this.user = user;
-	}
 
 	/**
 	 * @return the value
@@ -97,6 +87,34 @@ public class Secret extends ModelObject {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the login
+	 */
+	public String getLogin() {
+		return login;
+	}
+
+	/**
+	 * @param login the login to set
+	 */
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 }

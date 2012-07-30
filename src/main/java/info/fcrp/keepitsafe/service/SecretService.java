@@ -21,24 +21,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SecretService {
 	@Autowired
 	private SecretDAO secretDAO;
-	
+
 	@Autowired
 	private KeepDAO keepDAO;
-	
+
 	@RequestMapping(value = "/keep/{keepId}/secret", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Secret> findByKeepId(@PathVariable long keepId) {
 		List<Secret> secrets = secretDAO.findByKeepId(keepId);
 		return secrets;
 	}
-	
+
 	@RequestMapping(value = "/secret/{id}", method = RequestMethod.GET)
 	public @ResponseBody
 	Secret findById(@PathVariable long id) {
 		Secret secret = secretDAO.find(id);
 		return secret;
 	}
-	
+
 	@RequestMapping(value = "/keep/{keepId}/secret", method = RequestMethod.POST)
 	public @ResponseBody
 	Secret create(@PathVariable long keepId, @RequestBody Secret secret) {
@@ -47,13 +47,19 @@ public class SecretService {
 		secretDAO.save(secret);
 		return secret;
 	}
-	
+
 	@RequestMapping(value = "/secret/{id}", method = RequestMethod.PUT)
 	public @ResponseBody
 	Secret update(@PathVariable long id, @RequestBody Secret secret) {
-		secret.setId(id);
-		secretDAO.update(secret);
-		return secret;
+		Secret curSecret = secretDAO.find(id);
+		if (curSecret != null) {
+			curSecret.setName(secret.getName());
+			curSecret.setLogin(secret.getLogin());
+			curSecret.setDescription(secret.getDescription());
+			curSecret.setPassword(secret.getPassword());
+			secretDAO.save(curSecret);
+		}
+		return curSecret;
 	}
 
 	@RequestMapping(value = "/secret/{id}", method = RequestMethod.DELETE)
@@ -61,6 +67,5 @@ public class SecretService {
 		Secret secret = secretDAO.find(id);
 		secretDAO.delete(secret);
 	}
-	
-	
+
 }

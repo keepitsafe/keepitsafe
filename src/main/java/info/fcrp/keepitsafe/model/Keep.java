@@ -1,5 +1,6 @@
 package info.fcrp.keepitsafe.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,6 +31,7 @@ public class Keep extends ModelObject {
 
 	public Keep() {
 		super();
+		this.secrets = new ArrayList<Secret>();
 	}
 
 	public Keep(String name) {
