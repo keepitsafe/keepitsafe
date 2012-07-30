@@ -9,7 +9,7 @@ function addKeep(keep) {
 
 	$(container).append(
 			"<h2>" + keep["name"] + "</h2><p>" + keep["description"] + "</p>");
-
+  
 	$(container)
 			.append(
 					'<table id="tb-keep-'
@@ -18,7 +18,9 @@ function addKeep(keep) {
 
 	$(container).append(
 			"<a class=\"btn\" href=\"#\">Manage Permissions</a>&nbsp;");
-	$(container).append("<a class=\"btn\" href=\"#\">New Secret</a>");
+	$(container).append(
+			"<a class=\"btn\" href=\"#\" id=\"btn-new-secret-" + keep["id"]
+					+ "\">New Secret</a>");
 	$(container).append("<hr>");
 
 	secret_count = 0;
@@ -51,6 +53,17 @@ function addKeep(keep) {
 		secret_count++;
 	});
 
+	$("#btn-new-secret-" + keep["id"]).click(function() {
+		$("#secret-id").val("");
+		$("#secret-keep-id").val(keep["id"]);
+		$("#secret-name").val("");
+		$("#secret-description").val("");
+		$("#secret-login").val("");
+		$("#secret-password").val("");
+		$("#secret-password-tx").val("");
+		$("#secret-dialog").modal("show");
+	});
+
 	if (leftContainerCount > rightContainerCount) {
 		rightContainerCount += secret_count + 2;
 	} else {
@@ -59,58 +72,113 @@ function addKeep(keep) {
 
 }
 
-$(document).ready(
-		function() {
-			$.ajax({
-				type : "GET",
-				dataType : "json",
-				url : "http://localhost:8080/keepitsafe/keep",
-				success : function(data) {
-					jQuery.each(data, function(index, value) {
-						addKeep(value);
+$(document)
+		.ready(
+				function() {
+					$.ajax({
+						type : "GET",
+						dataType : "json",
+						url : "http://localhost:8080/keepitsafe/keep",
+						success : function(data) {
+							jQuery.each(data, function(index, value) {
+								addKeep(value);
+							});
+						}
 					});
-				}
-			});
 
-			$("#show-password").click(function() {
+					$("#show-password").click(function() {
 
-				if ($("#secret-password-tx").hasClass("hide")) {
-					$("#secret-password").addClass("hide");
-					$("#secret-password-tx").removeClass("hide");
-					$("#show-password").html("Hide Password");
-				} else {
-					$("#secret-password-tx").addClass("hide");
-					$("#secret-password").removeClass("hide");
-					$("#show-password").html("Show Password");
-				}
-			});
-
-			$("#secret-password-tx").keyup(function() {
-				$("#secret-password").val($(this).val());
-			});
-
-			$("#secret-password").keyup(function() {
-				$("#secret-password-tx").val($(this).val());
-			});
-
-			$("#btn-save-secret").click(
-					function() {
-						$.ajax({
-							type : "PUT",
-							dataType : "json",
-							contentType : "application/json",
-							url : "http://localhost:8080/keepitsafe/secret/"
-									+ $("#secret-id").val(),
-							data : $.toJSON({
-								id : $("#secret-id").val(),
-								name : $("#secret-name").val(),
-								description : $("#secret-description").val(),
-								login : $("#secret-login").val(),
-								password : $("#secret-password-tx").val()
-							}),
-							success : function(data) {
-								$("#secret-dialog").modal("hide");
-							}
-						});
+						if ($("#secret-password-tx").hasClass("hide")) {
+							$("#secret-password").addClass("hide");
+							$("#secret-password-tx").removeClass("hide");
+							$("#show-password").html("Hide Password");
+						} else {
+							$("#secret-password-tx").addClass("hide");
+							$("#secret-password").removeClass("hide");
+							$("#show-password").html("Show Password");
+						}
 					});
-		});
+
+					$("#secret-password-tx").keyup(function() {
+						$("#secret-password").val($(this).val());
+					});
+
+					$("#secret-password").keyup(function() {
+						$("#secret-password-tx").val($(this).val());
+					});
+
+					$("#btn-save-secret")
+							.click(
+									function() {
+										if ($("#secret-id").val() == "") {
+											alert("http://localhost:8080/keepitsafe/keep/"
+													+ $("#secret-keep-id")
+															.val() + "/secret");
+											$
+													.ajax({
+														type : "POST",
+														dataType : "json",
+														contentType : "application/json",
+														url : "http://localhost:8080/keepitsafe/keep/"
+																+ $(
+																		"#secret-keep-id")
+																		.val()
+																+ "/secret",
+														data : $
+																.toJSON({
+																	name : $(
+																			"#secret-name")
+																			.val(),
+																	description : $(
+																			"#secret-description")
+																			.val(),
+																	login : $(
+																			"#secret-login")
+																			.val(),
+																	password : $(
+																			"#secret-password-tx")
+																			.val()
+																}),
+														success : function(data) {
+															$("#secret-dialog")
+																	.modal(
+																			"hide");
+														}
+													});
+										} else {
+											$
+													.ajax({
+														type : "PUT",
+														dataType : "json",
+														contentType : "application/json",
+														url : "http://localhost:8080/keepitsafe/secret/"
+																+ $(
+																		"#secret-id")
+																		.val(),
+														data : $
+																.toJSON({
+																	id : $(
+																			"#secret-id")
+																			.val(),
+																	name : $(
+																			"#secret-name")
+																			.val(),
+																	description : $(
+																			"#secret-description")
+																			.val(),
+																	login : $(
+																			"#secret-login")
+																			.val(),
+																	password : $(
+																			"#secret-password-tx")
+																			.val()
+																}),
+														success : function(data) {
+															$("#secret-dialog")
+																	.modal(
+																			"hide");
+														}
+													});
+										}
+									});
+				});
