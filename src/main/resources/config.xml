@@ -35,8 +35,6 @@
 				<value>info.fcrp.keepitsafe.model.ModelObject</value>
 				<value>info.fcrp.keepitsafe.model.Secret</value>
 				<value>info.fcrp.keepitsafe.model.Keep</value>
-				<value>info.fcrp.keepitsafe.model.Right</value>
-				<value>info.fcrp.keepitsafe.model.User</value>
 			</list>
 		</property>
 	</bean>
@@ -50,18 +48,9 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<bean id="rightDAO" class="info.fcrp.keepitsafe.dao.RightDAOImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="userDAO" class="info.fcrp.keepitsafe.dao.UserDAOImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
 	<bean id="secretDAO" class="info.fcrp.keepitsafe.dao.SecretDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
 
 	<bean id="keepBean" class="info.fcrp.keepitsafe.bean.KeepBeanImpl">
 	</bean>
