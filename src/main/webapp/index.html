@@ -29,13 +29,41 @@
 		</div>
 		<div class="row">
 			<hr>
-			<a class="btn btn-primary">New Keep</a>
+			<a class="btn btn-primary" id="btn-keep-new">New Keep</a>
 			<hr>
 			<div class="span12">http://www.fcrp.info/keepitsafe</div>
 		</div>
 	</div>
 
-	<div class="modal hide" id="secret-dialog">
+	<div class="modal hide" id="dlg-keep">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3>Keep Dialog</h3>
+		</div>
+		<div class="modal-body">
+			<form class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="frm-keep-name">Name</label>
+					<div class="controls">
+						<input type="hidden" id="frm-keep-id"> <input type="text"
+							id="frm-keep-name">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="frm-keep-description">Description</label>
+					<div class="controls">
+						<textarea id="frm-keep-description"></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Cancel</a> <a href="#"
+				class="btn btn-success" id="btn-keep-save">Save</a>
+		</div>
+	</div>
+
+	<div class="modal hide" id="dlg-secret">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">×</button>
 			<h3>Secret Dialog</h3>
@@ -45,38 +73,39 @@
 				<div class="control-group">
 					<label class="control-label" for="secret-name">Secret</label>
 					<div class="controls">
-						<input type="hidden" id="secret-id"> <input type="hidden"
-							id="secret-keep-id"> <input type="text" id="secret-name">
+						<input type="hidden" id="frm-secret-id"> <input
+							type="hidden" id="frm-secret-keep-id"> <input type="text"
+							id="frm-secret-name">
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="secret-description">Description</label>
+					<label class="control-label" for="frm-secret-description">Description</label>
 					<div class="controls">
-						<textarea id="secret-description"></textarea>
+						<textarea id="frm-secret-description"></textarea>
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="secret-login">Login</label>
+					<label class="control-label" for="frm-secret-login">Login</label>
 					<div class="controls">
-						<input type="text" id="secret-login">
+						<input type="text" id="frm-secret-login">
 					</div>
 				</div>
 				<div class="control-group">
-					<label class="control-label" for="secret-password">Password</label>
+					<label class="control-label" for="frm-secret-password">Password</label>
 					<div class="controls">
-						<input type="password" id="secret-password"> <input
-							type="text" id="secret-password-tx" class="hide"> <a
-							href="#" class="btn" id="show-password">Show Password</a>
+						<input type="password" id="frm-secret-password"> <input
+							type="text" id="frm-secret-password-tx" class="hide"> <a
+							href="#" class="btn" id="btn-password-show">Show Password</a>
 					</div>
 				</div>
 			</form>
 		</div>
 		<div class="modal-footer">
 			<a href="#" class="btn" data-dismiss="modal">Close</a> <a href="#"
-				class="btn btn-primary">Copy Login</a><a href="#"
-				class="btn btn-primary">Copy Password</a><a href="#"
-				class="btn btn-success" id="btn-save-secret">Save changes</a><a
-				href="#" class="btn btn-danger">Delete</a>
+				class="btn btn-primary disabled">Copy Login</a><a href="#"
+				class="btn btn-primary disabled">Copy Password</a><a href="#"
+				class="btn btn-success" id="btn-secret-save">Save changes</a><a
+				href="#" class="btn btn-danger disabled">Delete</a>
 		</div>
 	</div>
 

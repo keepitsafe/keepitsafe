@@ -72,9 +72,13 @@ public class KeepService {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public @ResponseBody
 	Keep create(@PathVariable long id, @RequestBody Keep keep) {
-		keep.setId(id);
-		keepDAO.update(keep);
-		return keep;
+	    Keep curKeep = keepDAO.find(id);
+	    if(curKeep != null) {
+	        curKeep.setName(keep.getName());
+	        curKeep.setDescription(keep.getDescription());
+	    }
+		keepDAO.save(curKeep);
+		return curKeep;
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
