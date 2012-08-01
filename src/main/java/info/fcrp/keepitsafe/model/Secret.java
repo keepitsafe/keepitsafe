@@ -28,6 +28,8 @@ import javax.persistence.NamedQuery;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 /**
  * A password. Nothing else ;)
@@ -36,104 +38,103 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * 
  */
 @Entity
-@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
-@NamedQueries({
-		@NamedQuery(name="secret.find.keepId", query="select sc from Secret sc where sc.keep.id = :keepId")
-})
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@NamedQueries({ @NamedQuery(name = "secret.find.keepId", query = "select sc from Secret sc where sc.keep.id = :keepId") })
 public class Secret extends ModelObject {
-	@Column
-	private String name;
+    @Column
+    private String name;
 
-	@Column
-	private String description;
+    @Column
+    private String description;
 
-	@Column
-	private String login;
-	
-	@Column
-	private String password;
+    @Column
+    private String login;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonBackReference
-	private Keep keep;
+    @Column
+    @Type(type = "info.fcrp.keepitsafe.model.PasswordType")
+    private String password;
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Keep keep;
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    /**
+     * @return the value
+     */
 
-	/**
-	 * @return the value
-	 */
+    /**
+     * @return the keep
+     */
+    public Keep getKeep() {
+        return keep;
+    }
 
-	/**
-	 * @return the keep
-	 */
-	public Keep getKeep() {
-		return keep;
-	}
+    /**
+     * @param keep
+     *            the keep to set
+     */
+    public void setKeep(Keep keep) {
+        this.keep = keep;
+    }
 
-	/**
-	 * @param keep
-	 *            the keep to set
-	 */
-	public void setKeep(Keep keep) {
-		this.keep = keep;
-	}
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * @param password
+     *            the password to set
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	/**
-	 * @param password
-	 *            the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
 
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
+    /**
+     * @param description
+     *            the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    /**
+     * @return the login
+     */
+    public String getLogin() {
+        return login;
+    }
 
-	/**
-	 * @return the login
-	 */
-	public String getLogin() {
-		return login;
-	}
-
-	/**
-	 * @param login the login to set
-	 */
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    /**
+     * @param login
+     *            the login to set
+     */
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
 }
