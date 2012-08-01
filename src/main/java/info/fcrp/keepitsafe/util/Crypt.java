@@ -20,5 +20,14 @@
 package info.fcrp.keepitsafe.util;
 
 public class Crypt {
-	
+    private static String password;
+
+    public static Object crypt(Object object) {
+        return object;
+    }
+
+    public static Object decrypt(Object object) {
+        return object;
+    }
+
 }

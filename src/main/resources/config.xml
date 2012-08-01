@@ -64,6 +64,10 @@
 	<bean id="secretService" class="info.fcrp.keepitsafe.service.SecretService">
 	</bean>
 
+	<bean id="crypt" class="info.fcrp.keepitsafe.util.Crypt">
+		<property name="password" value="abc" />
+	</bean>
+
 	<mvc:interceptors>
 		<bean
 			class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">
@@ -75,5 +79,5 @@
 	</mvc:interceptors>
 
 	<mvc:resources mapping="/**" location="/" />
-	
+
 </beans>
