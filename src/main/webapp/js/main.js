@@ -28,7 +28,7 @@ $(document).ready(function() {
         url : "keep",
         success : function(data) {
             $.each(data, function(index, keep) {
-                addKeep(keep);
+                loadKeep(keep);
             });
         }
     });
@@ -57,7 +57,7 @@ $(document).ready(function() {
                 }),
                 success : function(data) {
                     $("#dlg-keep").modal("hide");
-                    addKeep(data);
+                    loadKeep(data);
                 }
             });
         } else {
@@ -101,6 +101,30 @@ $(document).ready(function() {
                 }),
                 success : function(data) {
                     $("#dlg-secret").modal("hide");
+                    //TODO Wrap on loadSecret function
+                   
+                    var tbody = $("#tb-keep-" + keepId + " tbody");
+                    tbody.append(
+                            "<tr><td><a href=\"#\" id=\"secret-" + data["id"] + "\">"
+                                    + data["name"] + "</a></td><td id=\"secret-" + data["id"] + "-description\">"
+                                    + data["description"] + "</td></tr>");
+
+                    $("#secret-" + data["id"]).click(function() {
+                        $.ajax({
+                            type : "GET",
+                            dataType : "json",
+                            url : "secret/" + data["id"],
+                            success : function(sc) {
+                                $("#frm-secret-id").val(sc["id"]);
+                                $("#frm-secret-name").val(sc["name"]);
+                                $("#frm-secret-description").val(sc["description"]);
+                                $("#frm-secret-login").val(sc["login"]);
+                                $("#frm-secret-password").val(sc["password"]);
+                                $("#frm-secret-password-tx").val(sc["password"]);
+                                $("#dlg-secret").modal("show");
+                            }
+                        });
+                    });
                 }
             });
         } else {
@@ -121,6 +145,8 @@ $(document).ready(function() {
                 }),
                 success : function(data) {
                     $("#dlg-secret").modal("hide");
+                    $("#secret-" + id).html($("#frm-secret-name").val());
+                    $("#secret-" + id + "-description").html($("#frm-secret-description").val());
                 }
             });
         }
@@ -158,8 +184,11 @@ var rightContainerCount = 0;
 
 
 /* Functions */
-function addKeep(keep) {
-    var cntnr = $("<div />", { id: "keep-" + keep["id"]});    
+
+/* Load a keep to the web frontend */
+function loadKeep(keep) {
+    
+    var cntnr = $("<div></div>", { id: "keep-" + keep["id"]});    
     
     /* Load on left or right panel? */
     if (leftContainerCount > rightContainerCount) {
@@ -251,4 +280,10 @@ function addKeep(keep) {
     }
 
 }
+
+/* Load the a secret on user interface */
+function loadSecret(keepId, Secret) {
+    
+}
+
 
