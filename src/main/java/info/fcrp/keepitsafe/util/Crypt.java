@@ -30,4 +30,10 @@ public class Crypt {
         return object;
     }
 
+    /**
+     * @param password the password to set
+     */
+    public void setPassword(String password) {
+        Crypt.password = password;
+    }
 }

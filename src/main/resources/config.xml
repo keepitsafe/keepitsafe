@@ -63,7 +63,7 @@
 
 	<bean id="secretService" class="info.fcrp.keepitsafe.service.SecretService">
 	</bean>
-
+	
 	<bean id="crypt" class="info.fcrp.keepitsafe.util.Crypt">
 		<property name="password" value="abc" />
 	</bean>
