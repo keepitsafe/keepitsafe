@@ -10,9 +10,12 @@ import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -23,44 +26,75 @@ import keepitsafe.Config;
 @ContextConfiguration(classes = { Config.class })
 @Transactional
 public class SecretDaoTest {
+    @Autowired
+    private SecretDao secretDao;
+   
+    @Autowired
+    private KeepDao keepDao;
 
-    @Autowired
-    private EntityManager em;
+    private Keep keep;
     
-    @Autowired
-    private SecretDao dao;
+    @Before
+    public void setup() {
+        keep = keepDao.save(new Keep("Passwords"));
+    }
     
     @Test
     public void save() {
-        Secret secret = new Secret("weak password");
-        
-        dao.save(secret);
-        
+        Secret secret = new Secret(keep, "weak password");
+        secretDao.save(secret);
+
         assertTrue(secret.getId() > 0);
     }
     
     @Test
     public void load() {
-        Secret secret = new Secret("weak password");
-        
-        dao.save(secret);
+        Secret secret = new Secret(keep, "weak password");
+        secretDao.save(secret);
         
         long id = secret.getId();
-        
-        Secret stSecret = dao.findOne(id);
+        Secret stSecret = secretDao.findOne(id);
         
         assertEquals(secret, stSecret);
     }
     
     @Test
     public void loadAll() {
-        dao.save(new Secret("weak password"));
-        dao.save(new Secret("another weak password"));
-        dao.save(new Secret("also weak password"));
+        secretDao.save(new Secret(keep, "weak password"));
+        secretDao.save(new Secret(keep, "another weak password"));
+        secretDao.save(new Secret(keep, "also weak password"));
 
         List<Secret> secrets = new ArrayList<>();
-        dao.findAll().forEach(secrets::add);
+        secretDao.findAll().forEach(secrets::add);
         
         assertEquals(3, secrets.size());
+    }
+    
+    @Test
+    public void addSecrets() {
+        Keep keep = new Keep("Passwords");
+        keep.addSecret("weak password");
+        keep.addSecret("another weak password");
+        keepDao.save(keep);
+        
+        List<Secret> secrets = new ArrayList<>();
+        secretDao.findByKeep(keep).forEach(secrets::add);
+        
+        assertEquals(2, secrets.size());
+    }
+    
+    @Test
+    public void deleteKeep() {
+        Keep keep = new Keep("Passwords");
+        keep.addSecret("weak password");
+        keep.addSecret("another weak password");
+        
+        keepDao.save(keep);
+        keepDao.delete(keep);
+        
+        List<Secret> secrets = new ArrayList<>();
+        secretDao.findAll().forEach(secrets::add);
+        
+        assertEquals(0, secrets.size());
     }
 }

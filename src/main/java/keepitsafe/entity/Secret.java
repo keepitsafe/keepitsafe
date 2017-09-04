@@ -4,23 +4,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Secret {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String content;
+    private String name;
+    private String login;
+    private String password;
         
-    Secret(String content) {
-        this.content = content;
+    @ManyToOne
+    private Keep keep;
+    
+    Secret(Keep keep, String name) {
+        this.keep = keep;
+        this.name = name;
     }
     
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((content == null) ? 0 : content.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((keep == null) ? 0 : keep.hashCode());
         return result;
     }
 
@@ -33,10 +41,15 @@ public class Secret {
         if (getClass() != obj.getClass())
             return false;
         Secret other = (Secret) obj;
-        if (content == null) {
-            if (other.content != null)
+        if (name == null) {
+            if (other.name != null)
                 return false;
-        } else if (!content.equals(other.content))
+        } else if (!name.equals(other.name))
+            return false;
+        if (keep == null) {
+            if (other.keep != null)
+                return false;
+        } else if (!keep.equals(other.keep))
             return false;
         return true;
     }
@@ -45,7 +58,35 @@ public class Secret {
         return id;
     }
 
-    public String getContent() {
-        return content;
-    }    
+    public String getName() {
+        return name;
+    }
+
+    public Keep getKeep() {
+        return keep;
+    }
+
+    void setKeep(Keep keep) {
+        this.keep = keep;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

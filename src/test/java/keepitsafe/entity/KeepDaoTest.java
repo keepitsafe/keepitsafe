@@ -22,13 +22,12 @@ import keepitsafe.Config;
 public class KeepDaoTest {
 
     @Autowired
-    private KeepDao dao;
-    
+    private KeepDao keepDao;
+      
     @Test
     public void save() {
         Keep keep = new Keep("Servers Passwords");
-        
-        dao.save(keep);
+        keepDao.save(keep);
         
         assertTrue(keep.getId() > 0);
     }
@@ -36,23 +35,22 @@ public class KeepDaoTest {
     @Test
     public void load() {
         Keep keep = new Keep("Servers Passwords");
+        keepDao.save(keep);
         
-        dao.save(keep);
         long id = keep.getId();
-        
-        Keep stKeep = dao.findOne(id);
+        Keep stKeep = keepDao.findOne(id);
         
         assertEquals(keep, stKeep);
     }
     
     @Test
     public void loadAll() {
-        dao.save(new Keep("Servers Passwords"));
-        dao.save(new Keep("DBs Passwords"));
-        dao.save(new Keep("Admin Passwords"));
+        keepDao.save(new Keep("Servers Passwords"));
+        keepDao.save(new Keep("DBs Passwords"));
+        keepDao.save(new Keep("Admin Passwords"));
         
         List<Keep> keeps = new ArrayList<>();
-        dao.findAll().forEach(keeps::add);
+        keepDao.findAll().forEach(keeps::add);
         
         assertEquals(3, keeps.size());
     }

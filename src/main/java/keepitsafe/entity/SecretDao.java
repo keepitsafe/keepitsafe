@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SecretDao extends CrudRepository<Secret, Long> {
 
+    Iterable<Secret> findByKeep(Keep keep);
+
 }
