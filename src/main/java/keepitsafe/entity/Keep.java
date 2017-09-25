@@ -21,6 +21,9 @@ public class Keep {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Secret> secrets;
     
+    Keep() {
+    }
+    
     public Keep(String name) {
         super();
         this.name = name;
@@ -66,4 +69,13 @@ public class Keep {
         
         return secret;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
 }
