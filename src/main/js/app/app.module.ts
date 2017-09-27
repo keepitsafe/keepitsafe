@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { KeepComponent } from './keep/keep.component';
+import { KeepService } from './keep.service';
 
 @NgModule({
   declarations: [
@@ -10,9 +12,12 @@ import { KeepComponent } from './keep/keep.component';
     KeepComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    KeepService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
