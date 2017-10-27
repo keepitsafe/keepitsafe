@@ -39,7 +39,7 @@ import keepitsafe.entity.Keep;
 import keepitsafe.entity.KeepDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { TestConfig.class })
+@ContextConfiguration(classes = TestConfig.class)
 @WebAppConfiguration
 @Transactional
 public class KeepServiceTest {

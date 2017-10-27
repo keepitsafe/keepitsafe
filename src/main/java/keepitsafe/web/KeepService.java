@@ -43,53 +43,52 @@ public class KeepService {
         keepDao.findAll().forEach(keeps::add);
         return keeps;
     }
-    
+
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> create(HttpServletRequest request, 
+    public ResponseEntity<Void> create(HttpServletRequest request,
             @RequestBody Keep keep) throws URISyntaxException {
         if (keep != null) {
             keep = keepDao.save(keep);
-            URI location = new URI(request
-                .getRequestURL().append("/")
-                .append(keep.getId()).toString());
+            URI location = new URI(request.getRequestURL().append("/")
+                                          .append(keep.getId()).toString());
             return ResponseEntity.created(location).build();
         }
         return ResponseEntity.badRequest().build();
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@RequestBody Keep keep,
             @PathVariable long id) {
         if (keep == null) {
             return ResponseEntity.badRequest().build();
         }
-        
-        //TODO Create when doesn´t exist
-        
+
+        // TODO Create when doesn´t exist
+
         Keep stoKeep = keepDao.findOne(id);
         stoKeep.setName(keep.getName());
         stoKeep = keepDao.save(keep);
         return ResponseEntity.ok().build();
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable long id) {
-        
+
         if (!keepDao.exists(id)) {
-            return ResponseEntity.badRequest().build();   
+            return ResponseEntity.badRequest().build();
         }
-        
+
         keepDao.delete(id);
         return ResponseEntity.ok().build();
     }
-    
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Keep> get(@PathVariable long id) {
-        
+
         if (!keepDao.exists(id)) {
-            return ResponseEntity.badRequest().build();   
+            return ResponseEntity.badRequest().build();
         }
-        
+
         Keep stoKeep = keepDao.findOne(id);
         return ResponseEntity.ok().body(stoKeep);
     }
