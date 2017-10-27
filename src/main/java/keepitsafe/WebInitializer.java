@@ -1,4 +1,4 @@
-package keepitsafe.config;
+package keepitsafe;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
